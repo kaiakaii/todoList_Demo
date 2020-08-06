@@ -2,10 +2,12 @@ package com.thoughtworks.service;
 
 import com.thoughtworks.dao.TodoRepository;
 import com.thoughtworks.entity.Todo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -30,6 +32,11 @@ public class TodoService {
     }
 
     public Todo updateTodo(int todoId, Todo upadateTodo) {
-        return null;
+        Todo todo = todoRepository.findById(todoId).orElse(null);
+        if (Objects.isNull(todo)){
+            return null;
+        }
+        upadateTodo.setId(todoId);
+        return todoRepository.save(upadateTodo);
     }
 }

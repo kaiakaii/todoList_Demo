@@ -15,15 +15,18 @@ public class TodoController {
     private TodoService todoService;
 
     @GetMapping
-    @CrossOrigin
     public List<Todo> getAllTodos() {
         return todoService.findAllTodos();
     }
 
     @PostMapping
-    @CrossOrigin
     @ResponseStatus(code = HttpStatus.CREATED)
     public Todo addTodo(@RequestBody Todo todo) {
         return todoService.addTodo(todo);
+    }
+
+    @PutMapping(path = "/{id}")
+    public Todo updateTodo(@PathVariable Integer id,@RequestBody Todo todo) {
+        return todoService.updateTodo(id,todo);
     }
 }
