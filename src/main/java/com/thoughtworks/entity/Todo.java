@@ -10,24 +10,24 @@ import java.util.Objects;
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String content;
-    private boolean status;
+    private Boolean status;
 
     public Todo() {
     }
 
-    public Todo(int id, String content, boolean status) {
+    public Todo(Integer id, String content, Boolean status) {
         this.id = id;
         this.content = content;
         this.status = status;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -39,11 +39,11 @@ public class Todo {
         this.content = content;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
@@ -52,13 +52,13 @@ public class Todo {
         if (this == o) return true;
         if (!(o instanceof Todo)) return false;
         Todo todo = (Todo) o;
-        return getId() == todo.getId() &&
-                isStatus() == todo.isStatus() &&
-                Objects.equals(getContent(), todo.getContent());
+        return Objects.equals(getId(), todo.getId()) &&
+                Objects.equals(getContent(), todo.getContent()) &&
+                Objects.equals(getStatus(), todo.getStatus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getContent(), isStatus());
+        return Objects.hash(getId(), getContent(), getStatus());
     }
 }
