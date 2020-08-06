@@ -40,7 +40,11 @@ public class TodoService {
         return todoRepository.save(upadateTodo);
     }
 
-    public Todo deleteTodo(int todoId) {
-        return null;
+    public boolean deleteTodo(int todoId) {
+        if (Objects.isNull(todoRepository.findById(todoId))){
+            return false;
+        }
+         todoRepository.deleteById(todoId);
+        return true;
     }
 }

@@ -70,9 +70,8 @@ public class TodoTest {
         Todo upadateTodo = new Todo(todoId,"sky3",true);
         when(todoRepository.findById(todoId)).thenReturn(java.util.Optional.of(upadateTodo));
         //when
-        Todo actualTodo = todoService.deleteTodo(todoId);
+        boolean result = todoService.deleteTodo(todoId);
         //then
-        assertNotNull(actualTodo);
-        assertEquals(todoId,actualTodo.getId());
+        assertTrue(result);
     }
 }
