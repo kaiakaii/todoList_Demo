@@ -39,4 +39,8 @@ public class TodoService {
         upadateTodo.setId(todoId);
         return todoRepository.save(upadateTodo);
     }
+
+    public Todo deleteTodo(int todoId) {
+        return null;
+    }
 }

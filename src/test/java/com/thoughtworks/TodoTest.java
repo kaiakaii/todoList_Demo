@@ -63,4 +63,16 @@ public class TodoTest {
         assertNotNull(actualTodo);
         assertEquals(actualTodo,upadateTodo);
     }
+    @Test
+    void should_return_none_when_delete_todo_given_todo_id() {
+        //given
+        int todoId = 1;
+        Todo upadateTodo = new Todo(todoId,"sky3",true);
+        when(todoRepository.findById(todoId)).thenReturn(java.util.Optional.of(upadateTodo));
+        //when
+        Todo actualTodo = todoService.deleteTodo(todoId);
+        //then
+        assertNotNull(actualTodo);
+        assertEquals(todoId,actualTodo.getId());
+    }
 }
