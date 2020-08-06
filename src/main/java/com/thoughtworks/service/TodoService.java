@@ -5,6 +5,7 @@ import com.thoughtworks.entity.Todo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TodoService {
@@ -19,6 +20,9 @@ public class TodoService {
     }
 
     public Todo addTodo(Todo todo) {
-        return null;
+        if(Objects.isNull(todo)){
+            return null;
+        }
+        return todoRepository.save(todo);
     }
 }
