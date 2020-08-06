@@ -13,8 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -47,7 +46,7 @@ public class TodoTest {
         //when
         Todo actualTodo = todoService.addTodo(todo);
         //then
-        assertNull(actualTodo);
+        assertNotNull(actualTodo);
         assertEquals(todo.getContent(),actualTodo.getContent());
     }
 }
