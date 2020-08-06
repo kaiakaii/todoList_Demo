@@ -23,6 +23,13 @@ public class TodoService {
         if(Objects.isNull(todo)){
             return null;
         }
+        if (Objects.isNull(todo.getStatus())){
+            todo.setStatus(false);
+        }
         return todoRepository.save(todo);
+    }
+
+    public Todo updateTodo(int todoId, Todo upadateTodo) {
+        return null;
     }
 }

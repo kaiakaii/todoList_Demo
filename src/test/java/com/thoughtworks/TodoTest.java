@@ -49,4 +49,18 @@ public class TodoTest {
         assertNotNull(actualTodo);
         assertEquals(todo.getContent(),actualTodo.getContent());
     }
+
+    @Test
+    void should_return_todo_when_update_todo_given_todo() {
+        //given
+        int todoId = 1;
+        Todo upadateTodo = new Todo(todoId,"sky3",true);
+        when(todoRepository.save(upadateTodo)).thenReturn(upadateTodo);
+        when(todoRepository.findById(todoId)).thenReturn(java.util.Optional.of(upadateTodo));
+        //when
+        Todo actualTodo = todoService.updateTodo(todoId,upadateTodo);
+        //then
+        assertNotNull(actualTodo);
+        assertEquals(actualTodo,upadateTodo);
+    }
 }

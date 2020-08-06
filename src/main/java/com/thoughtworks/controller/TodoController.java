@@ -9,17 +9,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/todo")
+@RequestMapping(path = "/todos")
 public class TodoController {
     @Autowired
     private TodoService todoService;
+
     @GetMapping
-    public List<Todo> getAllTodos(){
+    @CrossOrigin
+    public List<Todo> getAllTodos() {
         return todoService.findAllTodos();
     }
+
     @PostMapping
+    @CrossOrigin
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Todo addTodo(@RequestBody Todo todo){
+    public Todo addTodo(@RequestBody Todo todo) {
         return todoService.addTodo(todo);
     }
 }
