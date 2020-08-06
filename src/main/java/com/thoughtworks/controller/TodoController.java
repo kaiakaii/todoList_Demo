@@ -29,4 +29,9 @@ public class TodoController {
     public Todo updateTodo(@PathVariable Integer id,@RequestBody Todo todo) {
         return todoService.updateTodo(id,todo);
     }
+    @DeleteMapping(path = "/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteTodo(@PathVariable Integer id){
+        todoService.deleteTodo(id);
+    }
 }
