@@ -1,4 +1,4 @@
-package com.thoughtworks.springbootemployee.exception;
+package com.thoughtworks.exception;
 
 
 import com.thoughtworks.exception.ExceptionMessage;

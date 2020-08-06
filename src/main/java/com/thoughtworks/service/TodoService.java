@@ -2,12 +2,14 @@ package com.thoughtworks.service;
 
 import com.thoughtworks.dao.TodoRepository;
 import com.thoughtworks.entity.Todo;
+import com.thoughtworks.exception.ExceptionMessage;
+import com.thoughtworks.exception.NotFoundIDException;
+import com.thoughtworks.exception.NotFoundTodoException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -21,9 +23,9 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public Todo addTodo(Todo todo) {
+    public Todo addTodo(Todo todo) throws NotFoundTodoException {
         if(Objects.isNull(todo)){
-            return null;
+            throw new NotFoundTodoException(ExceptionMessage.NOT_FOUND_TODO);
         }
         if (Objects.isNull(todo.getStatus())){
             todo.setStatus(false);
@@ -31,18 +33,15 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
-    public Todo updateTodo(int todoId, Todo upadateTodo) {
-        Todo todo = todoRepository.findById(todoId).orElse(null);
-        if (Objects.isNull(todo)){
-            return null;
-        }
-        upadateTodo.setId(todoId);
-        return todoRepository.save(upadateTodo);
+    public Todo updateTodo(int todoId, Todo updateTodo) throws NotFoundTodoException {
+        Todo todo = todoRepository.findById(todoId).orElseThrow(()-> new NotFoundTodoException(ExceptionMessage.NOT_FOUND_ID));
+        BeanUtils.copyProperties(updateTodo,todo);
+        return todoRepository.save(todo);
     }
 
-    public boolean deleteTodo(int todoId) {
+    public boolean deleteTodo(int todoId) throws NotFoundIDException {
         if (Objects.isNull(todoRepository.findById(todoId))){
-            return false;
+            throw new NotFoundIDException(ExceptionMessage.NOT_FOUND_ID);
         }
          todoRepository.deleteById(todoId);
         return true;

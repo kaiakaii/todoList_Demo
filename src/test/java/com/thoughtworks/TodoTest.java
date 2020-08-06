@@ -3,6 +3,8 @@ package com.thoughtworks;
 import com.thoughtworks.dao.TodoRepository;
 import com.thoughtworks.entity.Todo;
 import com.thoughtworks.service.TodoService;
+import com.thoughtworks.exception.NotFoundIDException;
+import com.thoughtworks.exception.NotFoundTodoException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +41,7 @@ public class TodoTest {
     }
 
     @Test
-    void should_return_todo_when_add_todo_given_todo() {
+    void should_return_todo_when_add_todo_given_todo() throws NotFoundTodoException {
         //given
         Todo todo = new Todo(3,"sky3",false);
         when(todoRepository.save(todo)).thenReturn(todo);
@@ -51,7 +53,7 @@ public class TodoTest {
     }
 
     @Test
-    void should_return_todo_when_update_todo_given_todo() {
+    void should_return_todo_when_update_todo_given_todo() throws NotFoundTodoException {
         //given
         int todoId = 1;
         Todo upadateTodo = new Todo(todoId,"sky3",true);
@@ -64,7 +66,7 @@ public class TodoTest {
         assertEquals(actualTodo,upadateTodo);
     }
     @Test
-    void should_return_none_when_delete_todo_given_todo_id() {
+    void should_return_none_when_delete_todo_given_todo_id() throws NotFoundIDException {
         //given
         int todoId = 1;
         Todo upadateTodo = new Todo(todoId,"sky3",true);
